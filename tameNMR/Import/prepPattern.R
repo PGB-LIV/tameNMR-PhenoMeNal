@@ -54,7 +54,7 @@ makeUniformBinTable <- function(dataSet, wndw){
   ppmBins
 }
 
-# -- Intelligent Binning (paper)
+# -- Intelligent Binning (Needs testing..)
 makeIntelliBinTable <- function(data){
   data_ = data[,2:ncol(data)]
   meanSpec = apply(data_,1,median)

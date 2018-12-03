@@ -2,7 +2,7 @@
     <requirements>
         <container type="docker">container-registry.phenomenal-h2020.eu/phnmnl/tamenmr</container>
     </requirements>
-    <description> (Bucketing) </description>
+    <description> (Bucketing) of spectra</description>
     <command><![CDATA[
             BinSpectra.R --input=$input --output=$output --pattern=$pattern
             ]]>

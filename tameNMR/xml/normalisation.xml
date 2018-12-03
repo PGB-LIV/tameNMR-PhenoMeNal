@@ -2,7 +2,7 @@
     <requirements>
         <container type="docker">container-registry.phenomenal-h2020.eu/phnmnl/tamenmr</container>
     </requirements>
-    <description></description>
+    <description> of spectra </description>
     <command><![CDATA[
         #if $method_choice.method == "refPeak"
         Normalise.R --input=$input --output=$output --type=$method_choice.method --param=$method_choice.param
