@@ -1,4 +1,4 @@
-.libPaths('/home/galaxy/R/x86_64-pc-linux-gnu-library/3.2/')
+#!/usr/bin/env Rscript
 
 # --- Parse the command line arguments ---
 
