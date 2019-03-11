@@ -28,6 +28,14 @@ args = as.list(as.character(argsDF[,2]))
 names(args) <- argsDF[,1]
 
 # ================= Functions ======================
+min_window = function(data, wwidth=100){
+  n_points = nrow(data)
+  starts = seq(1, n_points, by=round(wwidth/5))
+  starts = starts[(starts+wwidth) < nrow(data)]
+  windows = do.call(rbind, lapply(starts, function(x) colMeans(data[x:(x+wwidth-1),])))
+  idx_min = which.min(rowMeans(windows))
+  max(windows[idx_min,])
+}
 
 # ==================== Global spectra alignment ====================
 
@@ -78,15 +86,28 @@ alignGlucoseLeftPeak = function(data, ppms, posPPM, low, high){
   # posPPM - a ppms value to which to align left glucose peak
   # low/high -  the range where to look for glucose peaks
 
+  
+  #SCALECONST = 10^round(log10(mean(data[1:200,])))
+  #X <- t(data[,2:ncol(data)])  / SCALECONST
+  #baselineThresh <- 2 * max(apply(abs(X[,1:200]),2,max))
+
   #PeakPicking
-  baselineThresh <- 2 * max(apply(abs(data[1:200,]),1,max)) / 10^round(log10(mean(data[1:200,])))
   #baselineThresh = 160000
-  peakList <- detectSpecPeaks(t(data[high:low,]) / 10^round(log10(mean(data[1:200,]))),
+  baselineThresh = 5 * min_window(data)
+  peakList <- detectSpecPeaks(t(data[high:low,]),
                               nDivRange = c(128),
                               scales = seq(1, 16, 2),
                               baselineThresh = baselineThresh,
                               SNR.Th = -1,
                               verbose=FALSE)
+  
+  #baselineThresh <- 2 * max(apply(abs(data[1:200,]),1,max)) / 10^round(log10(mean(data[1:200,])))
+  #peakList <- detectSpecPeaks(t(data[high:low,]) / 10^round(log10(mean(data[1:200,]))),
+  #                            nDivRange = c(128),
+  #                            scales = seq(1, 16, 2),
+  #                            baselineThresh = baselineThresh,
+  #                            SNR.Th = -1,
+  #                            verbose=FALSE)
 
   #removeNoGlucSamples
   rems = which(sapply(peakList, length)<2)
