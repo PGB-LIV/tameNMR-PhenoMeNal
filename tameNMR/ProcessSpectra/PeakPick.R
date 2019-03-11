@@ -49,8 +49,8 @@ writeNMRPeakFile <- function(data, outpath){
 data = readNMRTabFile(args[['input']])
 
 # -- Perform peak picking
-baselineThresh <- 10 * max(apply(abs(data[1:200,]),1,max)) / 10^round(log10(mean(data[1:200,])))
-X <- t(data[,2:ncol(data)]) / 10^round(log10(mean(data[1:200,])))
+baselineThresh <- 10 * max(apply(abs(data[1:200, 2:ncol(data)]),1,max)) / 10^round(log10(mean(data[1:200,2:ncol(data)])))
+X <- t(data[,2:ncol(data)]) / 10^round(log10(mean(data[1:200,2:ncol(data)])))
 #SCALECONST = 10^round(log10(mean(data[1:200,])))
 #X <- t(data[,2:ncol(data)])  / SCALECONST
 #baselineThresh <- 2 * max(apply(abs(X[,1:200]),2,max))
