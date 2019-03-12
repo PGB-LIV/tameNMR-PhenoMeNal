@@ -47,7 +47,7 @@ GlobalAlign = function(data){
   low = which.min(abs(ppms-5.12))
   high = which.min(abs(ppms-5.3))
   
-  outList = alignGlucoseLeftPeak(data_, ppms, posPPM = 5.20475, low, high)
+  outList = alignGlucoseLeftPeak(data_, ppms, posPPM = 5.22475, low, high)
   # removed [47,48,71,87]
   #patients1 = patients1[-c(47,48,71,87)]
   #conditions1 = conditions1[-c(47,48,71,87)]
